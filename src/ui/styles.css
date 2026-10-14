@@ -177,10 +177,12 @@ textarea.field { resize: vertical; width: 100%; }
 .transport { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .transport .time { font-size: 13px; }
 .timeline { border: 1px solid var(--line); border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 6px; background: var(--paper); overflow-x: auto; }
-.ruler { position: relative; height: 16px; min-width: 520px; font: 10px var(--mono); color: var(--muted); cursor: pointer; }
+.tlrow { display: grid; grid-template-columns: 64px minmax(520px, 1fr); align-items: center; }
+.tlrow > .lbl { font: 600 10px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.ruler { position: relative; height: 16px; font: 10px var(--mono); color: var(--muted); cursor: pointer; }
 .ruler span { position: absolute; top: 0; transform: translateX(-50%); }
-.track { position: relative; height: 30px; min-width: 520px; border-radius: 5px; background: var(--chrome); }
-.track .lbl { position: absolute; left: 6px; top: 50%; transform: translateY(-50%); font: 600 10px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; pointer-events: none; z-index: 1; }
+.ruler span:first-child { transform: none; }
+.track { position: relative; height: 30px; border-radius: 5px; background: var(--chrome); }
 .clip { position: absolute; top: 0; bottom: 0; background: var(--accent-soft); border: 2px solid var(--accent); border-radius: 5px; }
 .trimhandle { position: absolute; top: -2px; bottom: -2px; width: 10px; background: var(--accent); border-radius: 3px; cursor: ew-resize; touch-action: none; }
 .trimhandle::after { content: ""; position: absolute; left: 4px; top: 8px; bottom: 8px; width: 2px; background: rgba(255, 255, 255, 0.7); border-radius: 1px; }
@@ -220,6 +222,7 @@ textarea.field { resize: vertical; width: 100%; }
 .files > div { padding: 8px 10px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 10px; align-items: center; }
 .files > div:last-child { border-bottom: 0; }
 .files code { font-family: var(--mono); word-break: break-all; }
+.successbox .pill { align-self: flex-start; }
 .successbox { border: 1px solid color-mix(in srgb, var(--ok) 45%, var(--line)); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
 
 /* ---------- settings ---------- */

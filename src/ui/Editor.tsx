@@ -525,13 +525,17 @@ export function Editor({ k, id }: { k: Keepshot; id: number }) {
           </div>
 
           <div className="timeline">
-            <div className="ruler" onPointerDown={scrub}>
-              {ticks.map((t) => (
-                <span key={t} style={{ left: pct(t, dur) }}>{formatTimecode(t).replace(/\.\d$/, "")}</span>
-              ))}
+            <div className="tlrow">
+              <span className="lbl" />
+              <div className="ruler" onPointerDown={scrub}>
+                {ticks.map((t) => (
+                  <span key={t} style={{ left: pct(t, dur) }}>{formatTimecode(t).replace(/\.\d$/, "")}</span>
+                ))}
+              </div>
             </div>
+            <div className="tlrow">
+            <span className="lbl">Video</span>
             <div className="track" onPointerDown={scrub}>
-              <span className="lbl">Video</span>
               <div className="clip" style={{ left: pct(recipe.trim.start, dur), width: pct(recipe.trim.end - recipe.trim.start, dur) }}>
                 <div
                   className="trimhandle in"
@@ -553,6 +557,7 @@ export function Editor({ k, id }: { k: Keepshot; id: number }) {
                 />
               </div>
               <div className="playhead" style={{ left: pct(time, dur) }} />
+            </div>
             </div>
             <TimedTrack
               label="Zoom"
@@ -584,8 +589,9 @@ export function Editor({ k, id }: { k: Keepshot; id: number }) {
                 dragTime(e, (d) => ({ ...recipe, callouts: recipe.callouts.map((c) => (c.id === cid ? { ...c, ...shiftSpan(c0, d, mode, dur) } : c)) }));
               }}
             />
+            <div className="tlrow">
+            <span className="lbl">Moments</span>
             <div className="track">
-              <span className="lbl">Moments</span>
               {recipe.markers.map((m) => (
                 <div
                   key={m.id}
@@ -601,6 +607,7 @@ export function Editor({ k, id }: { k: Keepshot; id: number }) {
                   }}
                 />
               ))}
+            </div>
             </div>
           </div>
         </div>
@@ -832,8 +839,9 @@ function TimedTrack(props: {
   onDrag: (e: RPointerEvent, id: string, mode: "move" | "l" | "r") => void;
 }) {
   return (
+    <div className="tlrow">
+    <span className="lbl">{props.label}</span>
     <div className="track">
-      <span className="lbl">{props.label}</span>
       {props.items.map((it) => (
         <div
           key={it.id}
@@ -850,6 +858,7 @@ function TimedTrack(props: {
           <span className="edge r" onPointerDown={(e) => { props.onSelect(it.id); props.onDrag(e, it.id, "r"); }} />
         </div>
       ))}
+    </div>
     </div>
   );
 }

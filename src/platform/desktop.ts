@@ -82,7 +82,10 @@ export async function createPorts(config: NativeConfig): Promise<Ports> {
 
 /* ---------- native actions ---------- */
 
-export const fileUrl = (path: string) => (isDesktop() ? convertFileSrc(path) : path);
+let resolveFileUrl: (path: string) => string = (path) => convertFileSrc(path);
+/** Dev preview only: lets the mock backend serve sample media. */
+export const setFileUrlResolver = (fn: (path: string) => string) => (resolveFileUrl = fn);
+export const fileUrl = (path: string) => (isDesktop() ? resolveFileUrl(path) : path);
 export const copyText = (text: string) => writeText(text);
 export const copyImage = (path: string) => invoke<void>("copy_image", { path });
 export const revealInFolder = (path: string) => revealItemInDir(path);
