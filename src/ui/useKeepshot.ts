@@ -108,7 +108,7 @@ export function useKeepshot() {
     setCounts(c);
     setListLoading(false);
     native.dataSize().then(setStorageBytes);
-  }, [search, filter]);
+  }, [search, filter, ports]); // ports: re-run once the library has opened
 
   useEffect(() => {
     const t = setTimeout(() => void refresh(), 150);
