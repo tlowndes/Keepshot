@@ -14,6 +14,7 @@ Prerequisites (one-off):
 winget install OpenJS.NodeJS.LTS   # Node 22.13+
 winget install Rustlang.Rustup     # Rust (builds the desktop shell)
 winget install Gyan.FFmpeg         # ffmpeg + ffprobe on PATH
+winget install Microsoft.VisualStudio.2022.BuildTools --override "--quiet --wait --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended"   # C++ linker Rust needs
 ```
 
 Restart the terminal after installing, then from the project folder:
