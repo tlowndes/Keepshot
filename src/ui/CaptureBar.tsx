@@ -96,9 +96,17 @@ export function CaptureBar({ k }: { k: Keepshot }) {
 
       {!recording && (
         <>
-          <button className="btn" disabled={disabled} onClick={() => void k.takeScreenshot("region")} title="Ctrl+Shift+4">
-            <IconCamera /> Screenshot
-          </button>
+          <div className="seg" role="group" aria-label="Screenshot">
+            <button disabled={disabled} onClick={() => void k.takeScreenshot("screen")} title="Full screen · Ctrl+Shift+3">
+              <IconCamera /> Screen
+            </button>
+            <button disabled={disabled || !k.target.window} onClick={() => void k.takeScreenshot("window")} title="Active window">
+              <IconCamera /> Window
+            </button>
+            <button disabled={disabled} onClick={() => void k.takeScreenshot("region")} title="Region · Ctrl+Shift+4">
+              <IconCamera /> Region
+            </button>
+          </div>
           <button className="btn primary" disabled={disabled} onClick={() => void k.startRecording()} title="Ctrl+Shift+5">
             <IconRecord /> Record
           </button>

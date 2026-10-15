@@ -209,7 +209,7 @@ export function useKeepshot() {
   /* ---------- screenshots ---------- */
 
   const takeScreenshot = useCallback(
-    async (kind: "region" | "screen") => {
+    async (kind: "region" | "screen" | "window") => {
       const p = portsRef.current;
       const s = settingsRef.current;
       if (!p || !s) return;
@@ -219,6 +219,10 @@ export function useKeepshot() {
           rect = await native.pickRegion("screenshot");
           if (!rect) return;
           await sleep(150); // let the overlay disappear before capturing
+        } else if (kind === "window") {
+          const win = windows.find((w) => w.title === target.window);
+          if (!win) throw new Error("Pick a window from the list first.");
+          rect = win;
         } else {
           rect = await native.screenUnderCursor();
           if (!rect) throw new Error("No screen found to capture.");
@@ -245,7 +249,7 @@ export function useKeepshot() {
         toastError(err, () => void takeScreenshot(kind));
       }
     },
-    [refresh, toast, toastError],
+    [refresh, toast, toastError, windows, target],
   );
 
   /* ---------- recording ---------- */
