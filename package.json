@@ -1,0 +1,44 @@
+{
+  "name": "keepshot",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Local-only screen capture for Windows: screenshots, screen recording, trim, annotate and export.",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/start.mjs",
+    "dev": "tauri dev",
+    "dev:web": "vite",
+    "build": "tsc --noEmit && vite build",
+    "bundle": "tauri build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:unit": "vitest run tests/core",
+    "test:e2e": "vitest run tests/e2e",
+    "setup:whisper": "node scripts/setup-whisper.mjs",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.10.0",
+    "@tauri-apps/plugin-clipboard-manager": "^2.3.0",
+    "@tauri-apps/plugin-notification": "^2.7.0",
+    "@tauri-apps/plugin-opener": "^2.5.0",
+    "@tauri-apps/plugin-sql": "^2.3.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.10.0",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@types/sql.js": "^1.4.11",
+    "@vitejs/plugin-react": "^5.0.0",
+    "sql.js": "^1.13.0",
+    "typescript": "~5.9.2",
+    "vite": "^7.1.0",
+    "vitest": "^3.2.0"
+  },
+  "engines": {
+    "node": ">=22.13"
+  }
+}
