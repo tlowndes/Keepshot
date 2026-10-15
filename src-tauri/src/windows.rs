@@ -36,16 +36,16 @@ pub fn show_hud(app: &AppHandle) -> tauri::Result<()> {
 
 pub fn close_hud(app: &AppHandle) {
     if let Some(w) = app.get_webview_window("hud") {
-        let _ = w.close();
+        let _ = w.destroy();
     }
 }
 
 /// Opens a full-desktop overlay where the user drags a region.
 /// `purpose` is echoed back with the `region-selected` event.
 #[tauri::command]
-pub fn open_region_picker(app: AppHandle, purpose: String) -> Result<(), String> {
+pub async fn open_region_picker(app: AppHandle, purpose: String) -> Result<(), String> {
     if let Some(w) = app.get_webview_window("region") {
-        let _ = w.close();
+        let _ = w.destroy();
     }
     let monitors = app.available_monitors().map_err(|e| e.to_string())?;
     let (mut x0, mut y0, mut x1, mut y1) = (i32::MAX, i32::MAX, i32::MIN, i32::MIN);

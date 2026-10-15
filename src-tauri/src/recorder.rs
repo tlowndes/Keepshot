@@ -164,7 +164,7 @@ fn start_background(app: &AppHandle, clock: Arc<Mutex<Clock>>, cursor: Arc<Mutex
 }
 
 #[tauri::command]
-pub fn rec_start(
+pub async fn rec_start(
     app: AppHandle,
     state: State<'_, AppState>,
     template: Vec<String>,
@@ -206,7 +206,7 @@ pub fn rec_start(
 }
 
 #[tauri::command]
-pub fn rec_toggle_pause(app: AppHandle, state: State<'_, AppState>) -> Result<&'static str, String> {
+pub async fn rec_toggle_pause(app: AppHandle, state: State<'_, AppState>) -> Result<&'static str, String> {
     toggle_pause(&app, &state)
 }
 
@@ -227,7 +227,7 @@ pub fn toggle_pause(app: &AppHandle, state: &AppState) -> Result<&'static str, S
 }
 
 #[tauri::command]
-pub fn rec_stop(app: AppHandle, state: State<'_, AppState>) -> Result<Option<RecFinished>, String> {
+pub async fn rec_stop(app: AppHandle, state: State<'_, AppState>) -> Result<Option<RecFinished>, String> {
     stop(&app, &state)
 }
 
