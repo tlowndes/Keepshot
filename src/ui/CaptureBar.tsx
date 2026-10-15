@@ -89,28 +89,26 @@ export function CaptureBar({ k }: { k: Keepshot }) {
           <button className="btn icon ghost" title="Refresh screens, windows and microphones" onClick={() => void k.refreshSources()}>
             <IconRefresh />
           </button>
+          <button className="btn primary" disabled={disabled} onClick={() => void k.startRecording()} title="Ctrl+Shift+5">
+            <IconRecord /> Record
+          </button>
         </>
       )}
 
       <span className="spacer" />
 
       {!recording && (
-        <>
-          <div className="seg" role="group" aria-label="Screenshot">
-            <button disabled={disabled} onClick={() => void k.takeScreenshot("screen")} title="Full screen · Ctrl+Shift+3">
-              <IconCamera /> Screen
-            </button>
-            <button disabled={disabled || !k.target.window} onClick={() => void k.takeScreenshot("window")} title="Active window">
-              <IconCamera /> Window
-            </button>
-            <button disabled={disabled} onClick={() => void k.takeScreenshot("region")} title="Region · Ctrl+Shift+4">
-              <IconCamera /> Region
-            </button>
-          </div>
-          <button className="btn primary" disabled={disabled} onClick={() => void k.startRecording()} title="Ctrl+Shift+5">
-            <IconRecord /> Record
+        <div className="seg" role="group" aria-label="Screenshot">
+          <button disabled={disabled} onClick={() => void k.takeScreenshot("screen")} title="Full screen · Ctrl+Shift+3">
+            <IconCamera /> Screen
           </button>
-        </>
+          <button disabled={disabled || !k.target.window} onClick={() => void k.takeScreenshot("window")} title="Active window">
+            <IconCamera /> Window
+          </button>
+          <button disabled={disabled} onClick={() => void k.takeScreenshot("region")} title="Region · Ctrl+Shift+4">
+            <IconCamera /> Region
+          </button>
+        </div>
       )}
     </header>
   );
