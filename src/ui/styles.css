@@ -63,8 +63,13 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .btn.icon { padding: 6px; }
 .btn svg { width: 16px; height: 16px; flex: none; }
 .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--paper); }
-.seg button { border: 0; background: transparent; padding: 6px 12px; cursor: pointer; font-size: 13px; border-right: 1px solid var(--line); }
+.seg button {
+  display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; padding: 6px 12px;
+  cursor: pointer; font-size: 13px; line-height: 1.2; white-space: nowrap; border-right: 1px solid var(--line);
+}
 .seg button:last-child { border-right: 0; }
+.seg button:disabled { opacity: 0.5; cursor: not-allowed; }
+.seg button svg { width: 15px; height: 15px; flex: none; }
 .seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
 .field, select.field, textarea.field {
   border: 1px solid var(--line); border-radius: 7px; padding: 6px 9px; background: var(--paper); font-size: 13px; min-width: 0;
