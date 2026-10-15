@@ -98,6 +98,7 @@ Keepshot asks Windows for nothing at install time. What it touches:
 - **Screen capture**: ffmpeg's `gdigrab` (GDI). No permission prompt on Windows. Some DRM-protected video shows as black, by design. ffmpeg is run DPI-aware so scaled displays capture at full resolution.
 - **Microphone**: needs *Settings → Privacy & security → Microphone → Let desktop apps access your microphone*. If it's off, Keepshot records without audio and offers a button to that settings page.
 - **Global shortcuts**: registered with Windows; if another app holds one, Keepshot tells you and you can pick another in Settings.
+- **Notifications**: a screenshot briefly flashes the screen, plays a shutter sound and shows a Windows notification, feedback that works even when the window is minimised or closed to the tray.
 - **Files**: the UI can only read and write inside the Keepshot data folder (enforced in Rust). The webview can only load media from that folder.
 - **Network**: none at runtime. Only `npm run setup:whisper` downloads, once, from GitHub and Hugging Face.
 

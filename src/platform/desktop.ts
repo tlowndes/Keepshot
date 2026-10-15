@@ -7,6 +7,7 @@ import { convertFileSrc, invoke, isTauri } from "@tauri-apps/api/core";
 import { emitTo, listen, type UnlistenFn } from "@tauri-apps/api/event";
 import { availableMonitors, cursorPosition, monitorFromPoint, primaryMonitor } from "@tauri-apps/api/window";
 import { writeText } from "@tauri-apps/plugin-clipboard-manager";
+import { isPermissionGranted, requestPermission, sendNotification } from "@tauri-apps/plugin-notification";
 import { revealItemInDir } from "@tauri-apps/plugin-opener";
 import Database from "@tauri-apps/plugin-sql";
 import type { Rect } from "../core/recipe";
@@ -93,6 +94,20 @@ export const openDataFolder = () => invoke<void>("open_data_folder");
 export const openMicSettings = () => invoke<void>("open_mic_settings");
 export const showMainWindow = () => invoke<void>("show_main_window");
 export const dataSize = () => invoke<number>("data_size").catch(() => 0);
+
+/** A brief white screen flash, feedback for a capture even when Keepshot is hidden. */
+export const flashScreen = () => invoke<void>("flash_screen").catch(() => undefined);
+
+let notifyPermission: Promise<boolean> | null = null;
+/** A Windows notification. Never throws: a missed notification shouldn't break a capture. */
+export async function notify(title: string, body: string): Promise<void> {
+  try {
+    notifyPermission ??= isPermissionGranted().then((granted) => granted || requestPermission().then((p) => p === "granted"));
+    if (await notifyPermission) sendNotification({ title, body });
+  } catch {
+    // Best-effort.
+  }
+}
 
 export interface WindowInfo extends Rect {
   title: string;

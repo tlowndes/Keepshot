@@ -62,6 +62,7 @@ pub fn run() {
         .plugin(tauri_plugin_sql::Builder::default().build())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_opener::init())
+        .plugin(tauri_plugin_notification::init())
         .plugin(hotkeys::plugin())
         .setup(|app| {
             let cfg = config::resolve(app.handle());
@@ -104,6 +105,7 @@ pub fn run() {
             files::data_size,
             platform::list_windows,
             windows::open_region_picker,
+            windows::flash_screen,
             recorder::rec_start,
             recorder::rec_toggle_pause,
             recorder::rec_stop,

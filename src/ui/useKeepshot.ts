@@ -16,6 +16,7 @@ import {
 import type { Ports } from "../services/ports";
 import { loadSettings, saveSettings, type Settings } from "../services/settings";
 import * as native from "../platform/desktop";
+import { playShutterSound } from "./sound";
 
 export type View =
   | { name: "library" }
@@ -235,6 +236,10 @@ export function useKeepshot() {
         if (s.copyScreenshots) {
           copied = await native.copyImage(output).then(() => true, () => false);
         }
+        // Feedback for the capture, since the window may be minimised or closed to the tray.
+        void native.flashScreen();
+        playShutterSound();
+        void native.notify(copied ? "Screenshot saved and copied" : "Screenshot saved", `${capture.width}×${capture.height} · Screenshots folder`);
         toast({
           kind: "success",
           title: copied ? "Screenshot saved and copied" : "Screenshot saved",

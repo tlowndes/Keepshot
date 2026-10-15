@@ -235,7 +235,7 @@ textarea.field { resize: vertical; width: 100%; }
 .fielderr { color: var(--rec); font-size: 12px; }
 
 /* ---------- HUD & region picker (their own windows) ---------- */
-body.hud-body, body.region-body { background: transparent; overflow: hidden; }
+body.hud-body, body.region-body, body.flash-body { background: transparent; overflow: hidden; }
 .hud { margin: 6px; display: flex; align-items: center; gap: 10px; background: rgba(20, 22, 28, 0.94); color: #fff; padding: 7px 8px 7px 14px; border-radius: 99px; border: 1px solid rgba(255, 255, 255, 0.14); height: 46px; -webkit-app-region: drag; }
 .hud button { -webkit-app-region: no-drag; border: 0; border-radius: 99px; padding: 6px 12px; font-weight: 600; font-size: 12px; cursor: pointer; }
 .hud .time { font: 600 16px var(--mono); font-variant-numeric: tabular-nums; min-width: 72px; }
@@ -246,3 +246,5 @@ body.hud-body, body.region-body { background: transparent; overflow: hidden; }
 .region .sel { position: absolute; border: 2px solid #fff; background: rgba(47, 91, 234, 0.12); box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.35); }
 .region .dims { position: absolute; background: #fff; color: #1b1f26; font: 600 12px var(--mono); padding: 2px 6px; border-radius: 4px; }
 .region .help { position: fixed; left: 50%; top: 24px; transform: translateX(-50%); background: rgba(20, 22, 28, 0.94); color: #fff; padding: 8px 14px; border-radius: 99px; font-size: 13px; pointer-events: none; }
+.flash { position: fixed; inset: 0; background: #fff; animation: flash-fade 240ms ease-out forwards; }
+@keyframes flash-fade { from { opacity: 0.55; } to { opacity: 0; } }
